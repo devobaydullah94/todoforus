@@ -27,8 +27,11 @@ const app = Vue.createApp({
         },
 
         deleteTask(index) {
-            this.tasks.splice(index, 1);
-            this.saveTasksToCookies();
+            const confirmDelete = window.confirm("Are you sure you want to delete this items?");
+            if (confirmDelete) {
+                this.tasks.splice(index, 1);
+                this.saveTasksToCookies();
+            }
         },
         
         toggleEdit(task) {
