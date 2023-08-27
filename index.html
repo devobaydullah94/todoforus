@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Todos By Md Obaydullah</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./js/scripts.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  </head>
+  <body>
+        <!-- Todo Start  --> 
+    <div id="app" >
+      <div class="container" class="card">
+        <h1 class="card-header">WELCOME TO TODOS APP</h1>
+
+        <form>
+          <input type="text" v-model="newTask" @input="updateMessage" @keyup.enter.prevent="addTask"  placeholder="Enter To Do Here..." maxlength="70" required>
+          <input v-on:click="addtask()"  id="submit_btn" type="submit" value="Submit" />
+        </form>
+        <h2 v-if="tasks.length > 0">TOTAL Tasks: <strong>{{ totalTasks }}</strong></h2>
+        <p class="listheading" v-if="tasks.length > 0">The following tasks must be done.</p>
+
+        <p class="empty" v-if="tasks.length < 1">The to-do list appear here</p>
+
+        <table>
+          <ul class="todo-list">
+            <li v-for="(task, index) in tasks" :key="task.id">
+              <div class="left-section">
+                <form>
+                <input type="checkbox" class="checkbox" v-model="task.checked"> 
+                <span id="todos" v-if="!task.editing" :class="{ 'strikethrough': task.checked }" maxlength="55">{{ task.title }}</span>
+                <input v-else type="text" v-model="task.title" @keyup.enter.prevent="saveEdit(task)" maxlength="65">
+              </form>
+              </div>
+              <div class="right-section">
+                <button v-if="task.editing" @click="saveEdit(task)" class="btn btn-primary">Save</button>
+                <button @click="toggleEdit(task)" class="btn btn-success edit-btn"><i class="far fa-edit"></i></button>
+                <button @click="showConfirmationModal(index)" class="btn btn-danger delete-btn"><i class="far fa-trash-alt"></i></button>
+              </div>
+          </li>
+          </ul>
+      </table>
+      </div>
+        <!-- Todo end  --> 
+
+        <!-- Popup Start  --> 
+
+        <div id="confirmationModal" class="modal">
+          <div class="modal-content">
+              <p>Are you sure you want to delete this task?</p>
+              <button @click="confirmDelete" class="btn-confirm">Confirm</button>
+              <button @click="cancelDelete" class="btn-cancel">Cancel</button>
+          </div>
+      </div>
+
+        <!-- Popup End  --> 
+      
+
+        <footer class="footer" v-if="tasks.length < 7">
+          <div class="social-icons">
+            <a href="https://www.facebook.com/obaydullah.obaydullah.3" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="https://github.com/devobaydullah94" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+            <a href="https://t.me/obaydullah_mern" target="_blank" class="social-icon"><i class="fab fa-telegram"></i></a>
+        </div>
+        <p>&copy; 2023 Todos By <a href="https://www.facebook.com/obaydullah.obaydullah.3">Md Obaydullah</a></p>
+      </footer>
+
+
+      <script>
+        const mountedApp = app.mount("#app")
+      </script>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    </div>
+  </body>
+</html>
