@@ -11,18 +11,36 @@ body {
   
   h1 {
     font-weight: 700;
-    font-size: 36px;
+    font-size: 28px !important;
     color: #5e5e5e !important;
     margin: 50px auto;
   }
 
   h2 {
-    font-weight: 700;
-    font-size: 36px;
+    text-transform: uppercase;
+    font-size: 18px !important;
     color: #949494 !important;
-    margin: 50px auto;
+    margin: 0 auto !important;
+    margin-top: 5px !important;
   }
   
+  .listheading {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px !important;
+    color: #c5c5c5 !important;
+    margin: 0 auto;
+    margin-bottom: 6px !important;;
+    margin-top: 8px !important;;
+  }
+
+  .empty{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 46px !important;
+    color: #e5e4e4 !important;
+    margin: 126px auto;
+  }
   
   .todo-form {
     display: flex;
@@ -32,6 +50,7 @@ body {
   }
   
   input[type="text"] {
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 5px;
@@ -139,3 +158,52 @@ body {
 }
 
 
+/* modal popup */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* The modal content */
+.modal-content {
+  top: 250px;
+  display: block !important;
+  background-color: #fff;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.modal-content p {
+  color: #535353;
+  text-transform: uppercase;
+}
+
+/* Buttons inside the modal */
+.btn-confirm,
+.btn-cancel {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #3498db;
+  color: white;
+}

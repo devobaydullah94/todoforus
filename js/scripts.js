@@ -15,23 +15,46 @@ const app = Vue.createApp({
     methods: {
 
         addtask() {
-            if (this.text.trim() !== "") {
-                this.tasks.push({ id: this.tasks.length + 1, title: this.text, editing: false });
-                this.saveTasksToCookies();
+            if (this.newTask.trim() !== "") {
+                const existingTask = this.tasks.find(task => task.title.toLowerCase() === this.newTask.toLowerCase());
+                
+                if (!existingTask) {
+                    this.tasks.push({ id: this.tasks.length + 1, title: this.newTask, editing: false });
+                    this.saveTasksToCookies();
+                    this.newTask = "";
+                } else {
+                    
+                    alert("This task already exists!");
+                }
             }
-            
         },
 
         updateMessage(event) {
             this.text = event.target.value;
         },
 
+        showConfirmationModal(index) {
+            this.taskToDeleteIndex = index;
+            const modal = document.getElementById('confirmationModal');
+            modal.style.display = 'block';
+        },
+
+        cancelDelete(){
+            const modal = document.getElementById('confirmationModal');
+            modal.style.display = 'none';
+        },
+
+        confirmDelete() {
+            const index = this.taskToDeleteIndex;
+            this.deleteTask(index);
+            const modal = document.getElementById('confirmationModal');
+            modal.style.display = 'none';
+            this.taskToDeleteIndex = null;
+        },
+    
         deleteTask(index) {
-            const confirmDelete = window.confirm("Are you sure you want to delete this items?");
-            if (confirmDelete) {
-                this.tasks.splice(index, 1);
-                this.saveTasksToCookies();
-            }
+            this.tasks.splice(index, 1);
+            this.saveTasksToCookies();
         },
         
         toggleEdit(task) {
@@ -67,6 +90,8 @@ const app = Vue.createApp({
 
  
 })
+
+
 
 
 app.mount("#app");
